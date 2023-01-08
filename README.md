@@ -11,7 +11,8 @@ Things you may want to cover:
 
 * Configuration
 
-'Para criar a imagem utilize o comando `docker-compose build`'
+'Para criar a imagem utilize o comando `docker build .`'
+
 
 
 * Database creation
