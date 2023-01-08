@@ -1,4 +1,4 @@
-development:
+development: &default
   adapter: postgresql
   encoding: unicode
   database: study_diary_development
@@ -6,6 +6,7 @@ development:
   host: localhost
   username: postgres
   password: postgres
+  port: 5432
 
 test:
   adapter: postgresql
@@ -14,9 +15,11 @@ test:
   pool: 5
   username: postgres
   password: postgres
+  port: 5432
+
 
 staging:
   url: <%= ENV['DATABASE_URL'] %>
 
 production:
-  url: <%= ENV['DATABASE_URL'] %> 
+  url: <%= ENV['DATABASE_URL'] %>
