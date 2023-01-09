@@ -1,32 +1,24 @@
-staging:
-  adapter: "postgresql"
-  database: <%= ENV['POSTGRES_DB'] %>
-  encoding: "utf8"
-  host: <%= ENV['DATABASE_HOST'] %>
-  username: <%= ENV['POSTGRES_USER'] %>
-  password: <%= ENV['POSTGRES_PASSWORD'] %>
-  reconnect: true
-  port: 5432
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
-production:
-  adapter: "postgresql"
-  database: <%= ENV['POSTGRES_DB'] %>
-  encoding: "utf8"
+development:
+  <<: *default
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
   host: <%= ENV['DATABASE_HOST'] %>
-  username: <%= ENV['POSTGRES_USER'] %>
-  password: <%= ENV['POSTGRES_PASSWORD'] %>
-  reconnect: true
-  port: 5432
+  database: app_development
 
 test:
-  adapter: postgresql
-  database: <%= ENV['POSTGRES_DB'] %>
-  username: <%= ENV['POSTGRES_USER'] %>
-  password: <%= ENV['POSTGRES_PASSWORD'] %>
+  <<: *default
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
   host: <%= ENV['DATABASE_HOST'] %>
-  pool: 20
-  timeout: 5000
-  template: template0
-  adapter: postgresql
+  database: app_test
 
-
+production:
+  <<: *default
+  database: app_production
+  username: app
+  password: <%= ENV["APP_DATABASE_PASSWORD"] %>
